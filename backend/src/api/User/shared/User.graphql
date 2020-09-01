@@ -1,0 +1,12 @@
+type User {
+  id: ID!
+  username: String!
+  password: String!
+  admin: Boolean!
+  createdAt: Date!
+  updatedAt: Date
+}
+
+type Query {
+  user: User
+}

@@ -1,0 +1,37 @@
+type CheckUserResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type Query {
+  CheckUser: CheckUserResponse!
+  user: User
+}
+
+type LoginUserResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  LoginUser(username: String!, password: String!): LoginUserResponse!
+  RegisterUser(username: String!, password: String!): RegisterUserResponse!
+}
+
+type RegisterUserResponse {
+  ok: Boolean!
+  error: String
+}
+
+scalar Date
+
+type User {
+  id: ID!
+  username: String!
+  password: String!
+  admin: Boolean!
+  createdAt: Date!
+  updatedAt: Date
+}
