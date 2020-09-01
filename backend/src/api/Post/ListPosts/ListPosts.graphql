@@ -1,0 +1,12 @@
+type ListPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type Query {
+  ListPosts(
+    cursor: String
+    title: String
+  ): ListPostsResponse!
+}

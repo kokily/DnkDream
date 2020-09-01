@@ -6,6 +6,9 @@ type CheckUserResponse {
 
 type Query {
   CheckUser: CheckUserResponse!
+  ListPosts(cursor: String, title: String): ListPostsResponse!
+  ReadPost(id: ID!): ReadPostResponse!
+  post: Post
   ListUsers(cursor: ID, username: String): ListUsersResponse!
   ReadUser(id: ID!): ReadUserResponse!
   user: User
@@ -22,8 +25,10 @@ type Mutation {
   RegisterUser(username: String!, password: String!): RegisterUserResponse!
   SecedeUser: SecedeUserResponse!
   UpdateUser(password: String!): UpdateUserResponse!
+  AddPost(title: String!, body: String!): AddPostResponse!
+  RemovePost(id: ID!): RemovePostResponse!
+  UpdatePost(id: ID!, title: String, body: String): UpdatePostResponse!
   RemoveUser(id: ID!): RemoveUserResponse!
-  SetAdmin(id: ID!): SetAdminResponse!
 }
 
 type RegisterUserResponse {
@@ -44,6 +49,43 @@ type UpdateUserResponse {
 
 scalar Date
 
+type AddPostResponse {
+  ok: Boolean!
+  error: String
+  post: Post
+}
+
+type ListPostsResponse {
+  ok: Boolean!
+  error: String
+  posts: [Post]
+}
+
+type ReadPostResponse {
+  ok: Boolean!
+  error: String
+  post: Post
+}
+
+type RemovePostResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Post {
+  id: ID!
+  title: String!
+  body: String!
+  createdAt: Date!
+  updatedAt: Date
+}
+
+type UpdatePostResponse {
+  ok: Boolean!
+  error: String
+  post: Post
+}
+
 type ListUsersResponse {
   ok: Boolean!
   error: String
@@ -59,12 +101,6 @@ type ReadUserResponse {
 type RemoveUserResponse {
   ok: Boolean!
   error: String
-}
-
-type SetAdminResponse {
-  ok: Boolean!
-  error: String
-  user: User
 }
 
 type User {

@@ -1,11 +1,23 @@
-export const typeDefs = ["type CheckUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype Query {\n  CheckUser: CheckUserResponse!\n  ListUsers(cursor: ID, username: String): ListUsersResponse!\n  ReadUser(id: ID!): ReadUserResponse!\n  user: User\n}\n\ntype LoginUserResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  LoginUser(username: String!, password: String!): LoginUserResponse!\n  RegisterUser(username: String!, password: String!): RegisterUserResponse!\n  SecedeUser: SecedeUserResponse!\n  UpdateUser(password: String!): UpdateUserResponse!\n  RemoveUser(id: ID!): RemoveUserResponse!\n  SetAdmin(id: ID!): SetAdminResponse!\n}\n\ntype RegisterUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype SecedeUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype UpdateUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\nscalar Date\n\ntype ListUsersResponse {\n  ok: Boolean!\n  error: String\n  users: [User]\n}\n\ntype ReadUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype RemoveUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype SetAdminResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype User {\n  id: ID!\n  username: String!\n  password: String!\n  admin: Boolean!\n  createdAt: Date!\n  updatedAt: Date\n}\n"];
+export const typeDefs = ["type CheckUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype Query {\n  CheckUser: CheckUserResponse!\n  ListPosts(cursor: String, title: String): ListPostsResponse!\n  ReadPost(id: ID!): ReadPostResponse!\n  post: Post\n  ListUsers(cursor: ID, username: String): ListUsersResponse!\n  ReadUser(id: ID!): ReadUserResponse!\n  user: User\n}\n\ntype LoginUserResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  LoginUser(username: String!, password: String!): LoginUserResponse!\n  RegisterUser(username: String!, password: String!): RegisterUserResponse!\n  SecedeUser: SecedeUserResponse!\n  UpdateUser(password: String!): UpdateUserResponse!\n  AddPost(title: String!, body: String!): AddPostResponse!\n  RemovePost(id: ID!): RemovePostResponse!\n  UpdatePost(id: ID!, title: String, body: String): UpdatePostResponse!\n  RemoveUser(id: ID!): RemoveUserResponse!\n}\n\ntype RegisterUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype SecedeUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype UpdateUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\nscalar Date\n\ntype AddPostResponse {\n  ok: Boolean!\n  error: String\n  post: Post\n}\n\ntype ListPostsResponse {\n  ok: Boolean!\n  error: String\n  posts: [Post]\n}\n\ntype ReadPostResponse {\n  ok: Boolean!\n  error: String\n  post: Post\n}\n\ntype RemovePostResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Post {\n  id: ID!\n  title: String!\n  body: String!\n  createdAt: Date!\n  updatedAt: Date\n}\n\ntype UpdatePostResponse {\n  ok: Boolean!\n  error: String\n  post: Post\n}\n\ntype ListUsersResponse {\n  ok: Boolean!\n  error: String\n  users: [User]\n}\n\ntype ReadUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype RemoveUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: ID!\n  username: String!\n  password: String!\n  admin: Boolean!\n  createdAt: Date!\n  updatedAt: Date\n}\n"];
 /* tslint:disable */
 
 export interface Query {
   CheckUser: CheckUserResponse;
+  ListPosts: ListPostsResponse;
+  ReadPost: ReadPostResponse;
+  post: Post | null;
   ListUsers: ListUsersResponse;
   ReadUser: ReadUserResponse;
   user: User | null;
+}
+
+export interface ListPostsQueryArgs {
+  cursor: string | null;
+  title: string | null;
+}
+
+export interface ReadPostQueryArgs {
+  id: string;
 }
 
 export interface ListUsersQueryArgs {
@@ -34,6 +46,26 @@ export interface User {
 
 export type Date = any;
 
+export interface ListPostsResponse {
+  ok: boolean;
+  error: string | null;
+  posts: Array<Post> | null;
+}
+
+export interface Post {
+  id: string;
+  title: string;
+  body: string;
+  createdAt: Date;
+  updatedAt: Date | null;
+}
+
+export interface ReadPostResponse {
+  ok: boolean;
+  error: string | null;
+  post: Post | null;
+}
+
 export interface ListUsersResponse {
   ok: boolean;
   error: string | null;
@@ -51,8 +83,10 @@ export interface Mutation {
   RegisterUser: RegisterUserResponse;
   SecedeUser: SecedeUserResponse;
   UpdateUser: UpdateUserResponse;
+  AddPost: AddPostResponse;
+  RemovePost: RemovePostResponse;
+  UpdatePost: UpdatePostResponse;
   RemoveUser: RemoveUserResponse;
-  SetAdmin: SetAdminResponse;
 }
 
 export interface LoginUserMutationArgs {
@@ -69,11 +103,22 @@ export interface UpdateUserMutationArgs {
   password: string;
 }
 
-export interface RemoveUserMutationArgs {
+export interface AddPostMutationArgs {
+  title: string;
+  body: string;
+}
+
+export interface RemovePostMutationArgs {
   id: string;
 }
 
-export interface SetAdminMutationArgs {
+export interface UpdatePostMutationArgs {
+  id: string;
+  title: string | null;
+  body: string | null;
+}
+
+export interface RemoveUserMutationArgs {
   id: string;
 }
 
@@ -99,13 +144,24 @@ export interface UpdateUserResponse {
   user: User | null;
 }
 
-export interface RemoveUserResponse {
+export interface AddPostResponse {
+  ok: boolean;
+  error: string | null;
+  post: Post | null;
+}
+
+export interface RemovePostResponse {
   ok: boolean;
   error: string | null;
 }
 
-export interface SetAdminResponse {
+export interface UpdatePostResponse {
   ok: boolean;
   error: string | null;
-  user: User | null;
+  post: Post | null;
+}
+
+export interface RemoveUserResponse {
+  ok: boolean;
+  error: string | null;
 }

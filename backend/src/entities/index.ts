@@ -1,5 +1,6 @@
 import User from './User';
+import Post from './Post';
 
-const entities = [User];
+const entities = [User, Post];
 
 export default entities;

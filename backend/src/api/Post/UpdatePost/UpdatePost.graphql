@@ -1,0 +1,13 @@
+type UpdatePostResponse {
+  ok: Boolean!
+  error: String
+  post: Post
+}
+
+type Mutation {
+  UpdatePost(
+    id: ID!
+    title: String
+    body: String
+  ): UpdatePostResponse!
+}
