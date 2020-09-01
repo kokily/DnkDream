@@ -9,13 +9,14 @@ D&amp;K Dream's Development Blog - Not professional
 - DataBase: Postgres (with Typeorm), Because I resemble an elephant :)
 - Serve: My MacMini (Local service)
 
-
 ## Front End Tech
+
 - React.JS (with Typescript)
 - @apollo/react-hooks
-- 
+- CKEditor5 (with ClassicEditor)
 
 ### What to do later
+
 - Next.JS with Server Side Rendering
 - Social Login (with KaKao, Google, Naver)
 - Reply & Re-Reply implementation
