@@ -26,8 +26,8 @@ export const decodeToken = async (token: string): Promise<User | undefined> => {
   }
 };
 
-// Private Resolvers
-const privateResolver = (resolverFunction) => async (
+// Private Resolver
+export const privateResolver = (resolverFunction) => async (
   parent,
   args,
   context,
@@ -46,8 +46,6 @@ const privateResolver = (resolverFunction) => async (
     }
   }
 
-  console.log(ctx.state.user);
-
   if (ctx.state.user === undefined) {
     throw new Error('로그인을 해주세요');
   }
@@ -57,4 +55,31 @@ const privateResolver = (resolverFunction) => async (
   return resolved;
 };
 
-export default privateResolver;
+// Admin Resolver
+export const adminResolver = (resolverFunction) => async (
+  parent,
+  args,
+  context,
+  info
+) => {
+  const { ctx }: { ctx: Context } = context;
+  const token = ctx.request.headers['dnkdream_authenticate'];
+
+  if (token) {
+    const user = await decodeToken(token);
+
+    if (user && user.admin) {
+      ctx.state.user = user;
+    } else {
+      ctx.state.user = undefined;
+    }
+  }
+
+  if (ctx.state.user === undefined) {
+    throw new Error('로그인을 해주세요');
+  }
+
+  const resolved = await resolverFunction(parent, args, context, info);
+
+  return resolved;
+};

@@ -1,19 +1,22 @@
-import { Context } from 'koa';
-import { CheckUserResponse } from '../../../types/graph';
+import { getRepository } from 'typeorm';
+import { ReadUserQueryArgs, ReadUserResponse } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
-import { privateResolver } from '../../../utils/authResolvers';
+import { adminResolver } from '../../../utils/authResolvers';
+import User from '../../../entities/User';
 
 const resolvers: Resolvers = {
   Query: {
-    CheckUser: privateResolver(
-      async (_, __, { ctx }: { ctx: Context }): Promise<CheckUserResponse> => {
-        const { user } = ctx.state;
+    ReadUser: adminResolver(
+      async (_, args: ReadUserQueryArgs): Promise<ReadUserResponse> => {
+        const { id } = args;
 
         try {
+          const user = await getRepository(User).findOne({ id });
+
           if (!user) {
             return {
               ok: false,
-              error: '로그인을 해주세요',
+              error: '해당 사용자가 존재하지 않습니다.',
               user: null,
             };
           } else {

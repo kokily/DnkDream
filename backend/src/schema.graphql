@@ -6,6 +6,8 @@ type CheckUserResponse {
 
 type Query {
   CheckUser: CheckUserResponse!
+  ListUsers(cursor: ID, username: String): ListUsersResponse!
+  ReadUser(id: ID!): ReadUserResponse!
   user: User
 }
 
@@ -18,6 +20,10 @@ type LoginUserResponse {
 type Mutation {
   LoginUser(username: String!, password: String!): LoginUserResponse!
   RegisterUser(username: String!, password: String!): RegisterUserResponse!
+  SecedeUser: SecedeUserResponse!
+  UpdateUser(password: String!): UpdateUserResponse!
+  RemoveUser(id: ID!): RemoveUserResponse!
+  SetAdmin(id: ID!): SetAdminResponse!
 }
 
 type RegisterUserResponse {
@@ -25,7 +31,41 @@ type RegisterUserResponse {
   error: String
 }
 
+type SecedeUserResponse {
+  ok: Boolean!
+  error: String
+}
+
+type UpdateUserResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
 scalar Date
+
+type ListUsersResponse {
+  ok: Boolean!
+  error: String
+  users: [User]
+}
+
+type ReadUserResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type RemoveUserResponse {
+  ok: Boolean!
+  error: String
+}
+
+type SetAdminResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
 
 type User {
   id: ID!

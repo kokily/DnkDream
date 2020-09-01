@@ -1,6 +1,6 @@
+import { getRepository } from 'typeorm';
 import { LoginUserMutationArgs, LoginUserResponse } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
-import { getRepository } from 'typeorm';
 import User from '../../../entities/User';
 
 const resolvers: Resolvers = {

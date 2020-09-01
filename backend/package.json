@@ -43,6 +43,7 @@
   "scripts": {
     "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
     "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts",
+    "prestart": "yarn types",
     "start": "cross-env NODE_ENV=development ts-node-dev --respawn ./src/server.ts",
     "build": "npx tsc",
     "production": "cross-env NODE_ENV=production node dist/server.js"
