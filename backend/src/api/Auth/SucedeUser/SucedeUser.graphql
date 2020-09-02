@@ -1,8 +1,8 @@
-type SecedeUserResponse {
+type SucedeUserResponse {
   ok: Boolean!
   error: String
 }
 
 type Mutation {
-  SecedeUser: SecedeUserResponse!
+  SucedeUser: SucedeUserResponse!
 }

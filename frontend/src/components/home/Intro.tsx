@@ -1,0 +1,239 @@
+import React from 'react';
+import styled from 'styled-components';
+import oc from 'open-color';
+import { media, shadow } from 'styles';
+
+interface SkillProps {
+  id: number;
+  name: string;
+  url: string;
+}
+
+interface IntroProps {
+  img: string;
+  username: string;
+  content: string;
+  skill: SkillProps[];
+  onGithub: () => void;
+  onLogin: () => void;
+  onMove: (url: string) => void;
+}
+
+const Intro: React.FC<IntroProps> = ({
+  img,
+  username,
+  content,
+  skill,
+  onGithub,
+  onLogin,
+  onMove,
+}) => {
+  return (
+    <Container>
+      <Circles />
+      <div className="detail">
+        <Avatar>
+          <img src={img} alt="" />
+        </Avatar>
+        <About>
+          <div className="name">
+            <p>안녕하세요!!</p>
+            <h1 onClick={onLogin}>{username} 입니다.</h1>
+          </div>
+          <Content>
+            <p>{content}</p>
+            <button onClick={onGithub}>Github 저장소</button>
+          </Content>
+        </About>
+        <div className="clear" />
+      </div>
+      <Skill>
+        {skill &&
+          skill.map((s) => (
+            <button key={s.id} onClick={() => onMove(s.url)}>
+              {s.name}
+            </button>
+          ))}
+      </Skill>
+    </Container>
+  );
+};
+
+export default Intro;
+
+// Styling
+const Container = styled.div`
+  background: ${oc.gray[0]};
+  max-width: 920px;
+  height: 480px;
+  margin: auto;
+  transform: translateY(15%);
+  ${shadow(2)};
+  ${media.phone} {
+    height: auto;
+  }
+  .detail {
+    position: relative;
+    display: flex;
+    ${media.phone} {
+      flex-direction: column;
+    }
+  }
+  .clear {
+    clear: both;
+  }
+`;
+
+const Circles = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  &:before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: ${oc.teal[3]};
+    left: -6%;
+    top: -8%;
+    border-radius: 50%;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: ${oc.teal[3]};
+    right: -11%;
+    bottom: -15%;
+    border-radius: 50%;
+  }
+`;
+
+const Avatar = styled.div`
+  margin: 10px auto;
+  position: relative;
+  float: left;
+  padding: 20px;
+  animation: 1s ease-out 0s 1 slideInFromLeft;
+  img {
+    width: 240px;
+    margin-top: -70px;
+    border: 10px solid ${oc.cyan[5]};
+    ${shadow(2)};
+    cursor: pointer;
+    ${media.phone} {
+      width: 300px;
+    }
+  }
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+  }
+`;
+
+const About = styled.div`
+  float: right;
+  padding: 20px;
+  margin-top: 50px;
+  animation: 1s ease-out 0s 1 slideUpFromBottom;
+  ${media.phone} {
+    margin-top: 10px;
+  }
+  @keyframes slideUpFromBottom {
+    0% {
+      transform: translateY(70%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  .name {
+    text-align: center;
+    p {
+      margin: 0;
+      color: ${oc.gray[9]};
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+    h1 {
+      color: ${oc.cyan[5]};
+      font-weight: bold;
+      margin: 0;
+      font-size: 3em;
+    }
+  }
+`;
+
+const Content = styled.div`
+  text-align: center;
+  p {
+    line-height: 1.6em;
+  }
+  button {
+    border: none;
+    color: ${oc.gray[0]};
+    background: ${oc.cyan[5]};
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 250px;
+    height: 40px;
+    ${shadow(1)};
+    transition: 0.2s all;
+    &:hover {
+      ${shadow(2)};
+    }
+    &:focus,
+    &:active {
+      ${shadow(3)};
+    }
+  }
+`;
+
+const Skill = styled.div`
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  animation: 1s ease-in 0s 1 fadeIn;
+  button {
+    flex: 1;
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    color: ${oc.gray[0]};
+    background: ${oc.teal[5]};
+    cursor: pointer;
+    font-weight: bold;
+    width: 250px;
+    height: 40px;
+    ${shadow(1)};
+    transition: 0.2s all;
+    &:hover {
+      ${shadow(2)};
+    }
+    &:focus,
+    &:active {
+      ${shadow(3)};
+    }
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`;

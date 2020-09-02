@@ -2,8 +2,8 @@ import { css, createGlobalStyle } from 'styled-components';
 import oc from 'open-color';
 
 // 미디어 쿼리 헬퍼: https://www.styled-components.com/docs/advanced#media-templates 참조
-const sizes = (minWidth: number) => `
-  @media (min-width: ${minWidth}px)
+const sizes = (maxWidth: number) => `
+  @media screen and (max-width: ${maxWidth}px)
 `;
 
 export const media = {

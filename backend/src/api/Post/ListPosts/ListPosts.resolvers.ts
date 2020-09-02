@@ -1,7 +1,9 @@
 import { getManager, getRepository } from 'typeorm';
+import sanitizeHtml from 'sanitize-html';
 import { ListPostsQueryArgs, ListPostsResponse } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import Post from '../../../entities/Post';
+import limitHtml from '../../../utils/limitHtml';
 
 const resolvers: Resolvers = {
   Query: {
@@ -40,7 +42,13 @@ const resolvers: Resolvers = {
           query.andWhere('post.title like :title', { title: `%${title}%` });
         }
 
-        const posts = await query.getMany();
+        const beforePosts = await query.getMany();
+
+        const posts = beforePosts.map((post) => ({
+          ...post,
+          title: limitHtml(post.title, 'title'),
+          body: limitHtml(post.body, 'body'),
+        }));
 
         return {
           ok: true,

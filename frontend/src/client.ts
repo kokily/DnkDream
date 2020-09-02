@@ -39,7 +39,7 @@ const httpLink = new HttpLink({
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.map(({ message }) => {
-      return toast.error(`${message}`);
+      return console.log(message);
     });
   }
 

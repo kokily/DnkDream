@@ -6,7 +6,7 @@ type ListPostsResponse {
 
 type Query {
   ListPosts(
-    cursor: String
+    cursor: ID
     title: String
   ): ListPostsResponse!
 }

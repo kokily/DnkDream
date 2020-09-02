@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import client from 'client';
 import App from 'App';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <ApolloProvider client={client}>

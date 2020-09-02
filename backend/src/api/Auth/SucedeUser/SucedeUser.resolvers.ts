@@ -1,14 +1,14 @@
 import { Context } from 'koa';
 import { getRepository } from 'typeorm';
-import { SecedeUserResponse } from '../../../types/graph';
+import { SucedeUserResponse } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import { privateResolver } from '../../../utils/authResolvers';
 import User from '../../../entities/User';
 
 const resolvers: Resolvers = {
   Mutation: {
-    SecedeUser: privateResolver(
-      async (_, __, { ctx }: { ctx: Context }): Promise<SecedeUserResponse> => {
+    SucedeUser: privateResolver(
+      async (_, __, { ctx }: { ctx: Context }): Promise<SucedeUserResponse> => {
         const { user } = ctx.state;
 
         try {

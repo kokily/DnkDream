@@ -6,7 +6,7 @@ type CheckUserResponse {
 
 type Query {
   CheckUser: CheckUserResponse!
-  ListPosts(cursor: String, title: String): ListPostsResponse!
+  ListPosts(cursor: ID, title: String): ListPostsResponse!
   ReadPost(id: ID!): ReadPostResponse!
   post: Post
   ListUsers(cursor: ID, username: String): ListUsersResponse!
@@ -23,7 +23,7 @@ type LoginUserResponse {
 type Mutation {
   LoginUser(username: String!, password: String!): LoginUserResponse!
   RegisterUser(username: String!, password: String!): RegisterUserResponse!
-  SecedeUser: SecedeUserResponse!
+  SucedeUser: SucedeUserResponse!
   UpdateUser(password: String!): UpdateUserResponse!
   AddPost(title: String!, body: String!): AddPostResponse!
   RemovePost(id: ID!): RemovePostResponse!
@@ -36,7 +36,7 @@ type RegisterUserResponse {
   error: String
 }
 
-type SecedeUserResponse {
+type SucedeUserResponse {
   ok: Boolean!
   error: String
 }
