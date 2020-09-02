@@ -69,13 +69,13 @@ const Container = styled.div`
   margin: auto;
   transform: translateY(15%);
   ${shadow(2)};
-  ${media.phone} {
+  ${media.tablet} {
     height: auto;
   }
   .detail {
     position: relative;
     display: flex;
-    ${media.phone} {
+    ${media.tablet} {
       flex-direction: column;
     }
   }
@@ -123,7 +123,7 @@ const Avatar = styled.div`
     border: 10px solid ${oc.cyan[5]};
     ${shadow(2)};
     cursor: pointer;
-    ${media.phone} {
+    ${media.tablet} {
       width: 300px;
     }
   }

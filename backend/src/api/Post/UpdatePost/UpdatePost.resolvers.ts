@@ -12,7 +12,7 @@ const resolvers: Resolvers = {
   Mutation: {
     UpdatePost: adminResolver(
       async (_, args: UpdatePostMutationArgs): Promise<UpdatePostResponse> => {
-        const { id, title, body } = args;
+        const { id } = args;
 
         try {
           const wedding = await getRepository(Post).findOne({ id });

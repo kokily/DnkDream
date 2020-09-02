@@ -9,5 +9,6 @@ type Mutation {
     id: ID!
     title: String
     body: String
+    thumbnail: String
   ): UpdatePostResponse!
 }

@@ -27,7 +27,7 @@ type Mutation {
   UpdateUser(password: String!): UpdateUserResponse!
   AddPost(title: String!, body: String!, thumbnail: String): AddPostResponse!
   RemovePost(id: ID!): RemovePostResponse!
-  UpdatePost(id: ID!, title: String, body: String): UpdatePostResponse!
+  UpdatePost(id: ID!, title: String, body: String, thumbnail: String): UpdatePostResponse!
   RemoveUser(id: ID!): RemoveUserResponse!
 }
 
