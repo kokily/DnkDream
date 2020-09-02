@@ -18,6 +18,9 @@ class Post extends BaseEntity {
   @Column({ type: 'text' })
   body!: string;
 
+  @Column({ type: 'text', nullable: true })
+  thumbnail!: string | null;
+
   @Column({ type: 'timestamptz' })
   @CreateDateColumn()
   createdAt!: Date;

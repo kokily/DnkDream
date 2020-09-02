@@ -14,7 +14,8 @@ const ReadPostContainer = () => {
   const [{ data, loading }, { data: check }] = usePost({ postId });
   const [RemovePost] = useMutation(REMOVE_POST);
 
-  const onBack = () => {
+  const onBack = async () => {
+    await client.clearStore();
     history.goBack();
   };
 

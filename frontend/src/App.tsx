@@ -9,6 +9,7 @@ import NotFoundPage from 'pages/home/NotFoundPage';
 import IntroPage from 'pages/home/IntroPage';
 import { IS_LOGGED_IN } from 'graphql/cache.local';
 import ReadPostPage from 'pages/post/ReadPostPage';
+import WritePage from 'pages/write/WritePage';
 
 const App = () => {
   const { data } = useQuery(IS_LOGGED_IN);
@@ -29,6 +30,7 @@ const LogInRoutes = () => (
     <Route exact path="/" component={ListPostsPage} />
     <Route path="/intro" component={IntroPage} />
     <Route path="/post/:postId" component={ReadPostPage} />
+    <Route path="/write" component={WritePage} />
     <Route component={NotFoundPage} />
   </Switch>
 );

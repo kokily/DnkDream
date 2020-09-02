@@ -10,6 +10,7 @@ export const LIST_POSTS = gql`
         id
         title
         body
+        thumbnail
         createdAt
         updatedAt
       }
@@ -26,6 +27,7 @@ export const READ_POST = gql`
         id
         title
         body
+        thumbnail
         createdAt
         updatedAt
       }
@@ -35,14 +37,15 @@ export const READ_POST = gql`
 
 // Mutation
 export const ADD_POST = gql`
-  mutation AddPost($title: String!, $body: String!) {
-    AddPost(title: $title, body: $body) {
+  mutation AddPost($title: String!, $body: String!, $thumbnail: String) {
+    AddPost(title: $title, body: $body, thumbnail: $thumbnail) {
       ok
       error
       post {
         id
         title
         body
+        thumbnail
         createdAt
         updatedAt
       }
@@ -60,8 +63,8 @@ export const REMOVE_POST = gql`
 `;
 
 export const UPDATE_POST = gql`
-  mutation UpdatePost($id: ID!, $title: String, $body: String) {
-    UpdatePost(id: $id, title: $title, body: $body) {
+  mutation UpdatePost($id: ID!, $title: String, $body: String, $thumbnail: String) {
+    UpdatePost(id: $id, title: $title, body: $body, thumbnail: $thumbnail) {
       ok
       error
       post {

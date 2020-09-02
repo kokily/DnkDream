@@ -6,6 +6,7 @@ import './env';
 import app, { router } from './app';
 import ConnectionOptions from './ormConfig';
 import schema from './schema';
+import api from './api';
 
 const { PORT: port } = process.env;
 
@@ -15,6 +16,7 @@ const apollo = new ApolloServer({
 });
 
 // Routes
+router.use('/api', api.routes());
 router.get('/graphql', apollo.getMiddleware());
 router.post('/graphql', apollo.getMiddleware());
 

@@ -9,6 +9,7 @@ export interface PostResponse {
   id: string;
   title: string;
   body: string;
+  thumbnail?: string;
   createdAt: string;
   updatedAt?: string;
 }
@@ -64,7 +65,10 @@ const PostItem = ({
   return (
     <PostCardBlock onClick={() => onPost(post.id)}>
       <Thumbnail>
-        <img src="/profile.jpg" alt="" />
+        <img
+          src={post.thumbnail !== '' ? post.thumbnail : '/thumbnail.png'}
+          alt=""
+        />
       </Thumbnail>
 
       <h2>{post.title}</h2>
@@ -130,7 +134,7 @@ const PostCardBlock = styled.li`
   h2,
   .excerpt,
   .byline {
-    width: 65%;
+    width: 58%;
     float: right;
   }
 
@@ -150,13 +154,18 @@ const PostCardBlock = styled.li`
 `;
 
 const Thumbnail = styled.div`
+  overflow: hidden;
+  display: flex;
   margin-bottom: 1em;
-  width: 30%;
+  width: 34%;
   margin: 0 5% 0 0;
   float: left;
+  align-items: center;
+  justify-content: center;
 
   img {
-    width: 100%;
+    width: 320px;
+    height: 240px;
   }
 `;
 
