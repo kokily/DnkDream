@@ -64,18 +64,15 @@ const PostItem = ({
 }) => {
   return (
     <PostCardBlock onClick={() => onPost(post.id)}>
-      <Thumbnail>
-        <img
-          src={post.thumbnail !== '' ? post.thumbnail : '/thumbnail.png'}
-          alt=""
-        />
-      </Thumbnail>
+      <img
+        className="thumbnail"
+        src={post.thumbnail !== '' ? post.thumbnail : '/thumbnail.png'}
+        alt=""
+      />
 
-      <h2>{post.title}</h2>
-      <div className="excerpt">
-        <p>{post.body}</p>
-      </div>
+      <TitlePane>{post.title}</TitlePane>
       <div className="byline">{formatDate(post.createdAt)} 작성</div>
+      <div className="copyright">D&K Dreams Blog</div>
 
       <Avatar>
         <img src="/profile.jpg" className="avatar" alt="" />
@@ -88,103 +85,99 @@ export default ListPosts;
 
 // Styling
 const Container = styled.div`
-  overflow: hidden;
   background: white;
-  box-sizing: border-box;
-  width: 95%;
-  margin: 2em auto;
-  padding: 1em 5%;
-
-  ${media.phone} {
-    margin: 0 auto;
-    padding: 1rem 0;
-  }
-
-  h2 {
-    color: ${oc.cyan[9]};
-    font-size: 1.25em;
-    font-weight: bold;
-    margin-bottom: 1em;
-
-    ${media.phone} {
-      font-size: 0.95em;
-    }
-  }
-
-  p {
-    margin-bottom: 1em;
-    line-height: 1.5;
-  }
+  margin-top: 4.2rem;
 `;
 
 const PostListBlock = styled.ul`
-  margin: 0 auto 1em;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
   padding: 0;
 `;
 
 const PostCardBlock = styled.li`
-  padding: 0.5em;
-  display: block;
-  clear: float;
-  overflow: hidden;
-  margin: 0 auto 2em;
+  background: white;
+  border-radius: 5px;
   ${shadow(1)};
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.2s;
   cursor: pointer;
 
-  h2,
-  .excerpt,
-  .byline {
-    width: 58%;
-    float: right;
+  .thumbnail {
+    width: 100%;
+    height: 200px;
   }
 
   .byline {
+    margin-top: 1.2rem;
+    margin-right: 1.4rem;
+    margin-bottom: 0;
+    text-align: right;
     color: ${oc.gray[5]};
   }
 
-  ${media.tablet} {
-    .excerpt {
-      display: none;
-    }
+  .copyright {
+    margin: 1rem 1.4rem 0 0;
+    padding: 0;
+    text-align: right;
+    position: relative;
+    top: 40px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: ${oc.cyan[9]};
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.1);
   }
 
   &:hover {
-    ${shadow(3)};
+    ${shadow(2)};
   }
 `;
 
-const Thumbnail = styled.div`
+const TitlePane = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+  transition: all 0.5s;
   overflow: hidden;
-  display: flex;
-  margin-bottom: 1em;
-  width: 34%;
-  margin: 0 5% 0 0;
-  float: left;
-  align-items: center;
-  justify-content: center;
+  padding: 20px 25px;
 
-  img {
-    width: 320px;
-    height: 240px;
+  ${media.tablet} {
+    padding: 0;
+  }
+  background: ${oc.gray[0]};
+  margin: -15px 20px 20px;
+  position: relative;
+  z-index: 4;
+  color: ${oc.cyan[9]};
+  ${shadow(1)};
+
+  &:hover {
+    color: ${oc.teal[9]};
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.1);
   }
 `;
 
 const Avatar = styled.div`
   width: 78px;
   height: 78px;
-  ${media.tablet} {
-    width: 50px;
-    height: 50px;
-  }
   z-index: 9;
   position: relative;
-  top: -12px;
-  left: -12px;
+  top: -66px;
+  left: 30px;
   right: 0px;
   border: 4px solid #fff;
   background: #000;
   background-size: cover;
   border-radius: 50%;
+  margin: 0;
+  padding: 0;
   .avatar {
     width: 100%;
     position: absolute;
@@ -194,6 +187,6 @@ const Avatar = styled.div`
     right: 0;
     margin: auto;
     border-radius: 50%;
-    ${shadow(1)};
+    ${shadow(2)};
   }
 `;

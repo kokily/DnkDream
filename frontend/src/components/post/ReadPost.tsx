@@ -2,9 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import htmlParser from 'react-html-parser';
+import Utterancer from 'utterances-react';
 import PageTemplate from 'components/common/PageTemplate';
 import { PostResponse } from 'components/home/ListPosts';
 import formatDate from 'utils/date';
+import { media } from 'styles';
 
 const ReadPost = ({
   post,
@@ -25,6 +27,18 @@ const ReadPost = ({
         <GradientBorder />
 
         <Content className="content">{htmlParser(post.body)}</Content>
+
+        <Utterancer
+          repo="kokily/dnkdream-comment"
+          issue-term="pathname"
+          label="Comment"
+          theme="github-light"
+          cross-origin="anonymouse"
+          async
+          style={`& .utterances {
+            max-width: 950px;
+          }`}
+        />
       </PostBlock>
     </PageTemplate>
   );
@@ -34,7 +48,14 @@ export default ReadPost;
 
 // Styling
 const PostBlock = styled.div`
-  margin-top: 4rem;
+  background: white;
+  margin: 0;
+  padding: 40px;
+
+  ${media.tablet} {
+    margin: 4.5rem 0 0 0;
+    padding: 0.5rem;
+  }
 `;
 
 const PostHeader = styled.div`

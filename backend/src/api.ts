@@ -37,7 +37,7 @@ api.post('/uploads', async (ctx: Context, next: Next) => {
 
     ctx.body = {
       uploaded: true,
-      url: `http://localhost:4000/${newFilename}`,
+      url: `http://211.248.186.144:4000/${newFilename}`,
     };
   }
 });

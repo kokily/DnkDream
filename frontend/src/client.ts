@@ -32,8 +32,8 @@ const authMiddleware = new ApolloLink((operation: Operation, forward: any) => {
 const httpLink = new HttpLink({
   uri:
     NODE_ENV === 'development'
-      ? 'http://localhost:4000/graphql'
-      : 'http://localhost:4000/graphql',
+      ? 'http://211.248.186.144:4000/graphql'
+      : 'http://211.248.186.144:4000/graphql',
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {

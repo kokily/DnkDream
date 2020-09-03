@@ -79,7 +79,7 @@ export default Aside;
 const AsideContainer = styled.div`
   height: 100%;
   min-height: 400px;
-  width: 0px;
+  width: 200px;
   background: ${oc.cyan[5]};
   color: ${oc.gray[0]};
   position: fixed;
@@ -88,6 +88,7 @@ const AsideContainer = styled.div`
   left: 0;
   overflow: hidden;
   transition: all 0.3s ease;
+  z-index: 10;
   ${shadow(3)};
   ul {
     min-width: 200px;
@@ -101,7 +102,6 @@ const AsideContainer = styled.div`
     width: 200px;
   }
   ${media.tablet} {
-    z-index: 10;
     width: 200px;
     &.active {
       width: 0px;

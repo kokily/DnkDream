@@ -4,7 +4,7 @@ import { LIST_POSTS } from 'graphql/post.queries';
 import useScroll from './useScroll';
 
 const useTitle = (title?: string) => {
-  const { data, loading, error, fetchMore } = useQuery(LIST_POSTS, {
+  const { data, loading, error, fetchMore, refetch } = useQuery(LIST_POSTS, {
     variables: {
       title,
     },
@@ -46,7 +46,7 @@ const useTitle = (title?: string) => {
     onLoadMore,
   });
 
-  return { data, loading, error, isFinished };
+  return { data, loading, error, isFinished, refetch };
 };
 
 export default useTitle;

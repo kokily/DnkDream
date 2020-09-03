@@ -68,7 +68,8 @@ const Container = styled.div`
   margin-top: 1rem;
   margin-left: auto;
   margin-right: auto;
-  ${media.desktop} {
+
+  ${media.phone} {
     width: 1200px;
     padding-left: 15rem;
     padding-right: 15rem;

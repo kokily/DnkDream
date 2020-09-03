@@ -8,8 +8,8 @@ const sizes = (maxWidth: number) => `
 
 export const media = {
   wide: sizes(1200),
-  desktop: sizes(992),
-  tablet: sizes(768),
+  desktop: sizes(1000),
+  tablet: sizes(920),
   phone: sizes(376),
 };
 
