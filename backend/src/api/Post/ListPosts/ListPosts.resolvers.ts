@@ -1,5 +1,4 @@
 import { getManager, getRepository } from 'typeorm';
-import sanitizeHtml from 'sanitize-html';
 import { ListPostsQueryArgs, ListPostsResponse } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import Post from '../../../entities/Post';
