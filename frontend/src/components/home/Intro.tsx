@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import { media, shadow } from 'styles';
+import Meta, { MetaProps } from 'components/common/Meta';
 
 interface SkillProps {
   id: number;
@@ -28,34 +29,43 @@ const Intro: React.FC<IntroProps> = ({
   onLogin,
   onMove,
 }) => {
+  const metaData: MetaProps = {
+    titleData: '소개 페이지 - D&K Dreams Blog',
+    descriptionData:
+      'Intro, About, 소개, D&K Dreams, Node, React, Typescript, Apollo, GraphQL, Postgres, Blog',
+  };
+
   return (
-    <Container>
-      <Circles />
-      <div className="detail">
-        <Avatar>
-          <img src={img} alt="" />
-        </Avatar>
-        <About>
-          <div className="name">
-            <p>안녕하세요!!</p>
-            <h1 onClick={onLogin}>{username} 입니다.</h1>
-          </div>
-          <Content>
-            <p>{content}</p>
-            <button onClick={onGithub}>Github 저장소</button>
-          </Content>
-        </About>
-        <div className="clear" />
-      </div>
-      <Skill>
-        {skill &&
-          skill.map((s) => (
-            <button key={s.id} onClick={() => onMove(s.url)}>
-              {s.name}
-            </button>
-          ))}
-      </Skill>
-    </Container>
+    <>
+      <Meta {...metaData} />
+      <Container>
+        <Circles />
+        <div className="detail">
+          <Avatar>
+            <img src={img} alt="" />
+          </Avatar>
+          <About>
+            <div className="name">
+              <p>안녕하세요!!</p>
+              <h1 onClick={onLogin}>{username} 입니다.</h1>
+            </div>
+            <Content>
+              <p>{content}</p>
+              <button onClick={onGithub}>Github 저장소</button>
+            </Content>
+          </About>
+          <div className="clear" />
+        </div>
+        <Skill>
+          {skill &&
+            skill.map((s) => (
+              <button key={s.id} onClick={() => onMove(s.url)}>
+                {s.name}
+              </button>
+            ))}
+        </Skill>
+      </Container>
+    </>
   );
 };
 

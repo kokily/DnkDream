@@ -4,6 +4,7 @@ import oc from 'open-color';
 import { shadow, media } from 'styles';
 import Search from './Search';
 import formatDate from 'utils/date';
+import Meta, { MetaProps } from 'components/common/Meta';
 
 export interface PostResponse {
   id: string;
@@ -31,27 +32,35 @@ const ListPosts: React.FC<ListPostsProps> = ({
   onKeyPress,
   onPost,
 }) => {
+  const metaData: MetaProps = {
+    titleData: '포스트 리스트 - D&K Dreams Blog',
+    descriptionData: '포스트 리스트, 포스트, Post List, Posts, 블로그',
+  };
+
   return (
-    <Container>
-      <Search
-        mode="포스트"
-        search={search}
-        onChange={onChange}
-        onSearch={onSearch}
-        onKeyPress={onKeyPress}
-      />
-      <PostListBlock>
-        {posts === null || posts.length === 0 ? (
-          <div>포스트가 존재하지 않습니다.</div>
-        ) : (
-          <>
-            {posts.map((post) => (
-              <PostItem key={post.id} post={post} onPost={onPost} />
-            ))}
-          </>
-        )}
-      </PostListBlock>
-    </Container>
+    <>
+      <Meta {...metaData} />
+      <Container>
+        <Search
+          mode="포스트"
+          search={search}
+          onChange={onChange}
+          onSearch={onSearch}
+          onKeyPress={onKeyPress}
+        />
+        <PostListBlock>
+          {posts === null || posts.length === 0 ? (
+            <div>포스트가 존재하지 않습니다.</div>
+          ) : (
+            <>
+              {posts.map((post) => (
+                <PostItem key={post.id} post={post} onPost={onPost} />
+              ))}
+            </>
+          )}
+        </PostListBlock>
+      </Container>
+    </>
   );
 };
 

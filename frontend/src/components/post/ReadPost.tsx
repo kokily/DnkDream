@@ -7,6 +7,7 @@ import PageTemplate from 'components/common/PageTemplate';
 import { PostResponse } from 'components/home/ListPosts';
 import formatDate from 'utils/date';
 import { media } from 'styles';
+import Meta, { MetaProps } from '../common/Meta';
 
 const ReadPost = ({
   post,
@@ -15,32 +16,40 @@ const ReadPost = ({
   post: PostResponse;
   PostButton: React.ReactNode;
 }) => {
+  const metaData: MetaProps = {
+    titleData: `${post.title} - D&K Dreams Blog`,
+    descriptionData: post.body,
+  };
+
   return (
-    <PageTemplate>
-      <PostBlock>
-        <PostHeader>
-          <h1>{post.title}</h1>
-          <p>{formatDate(post.createdAt)}</p>
-          {PostButton}
-        </PostHeader>
+    <>
+      <Meta {...metaData} />
+      <PageTemplate>
+        <PostBlock>
+          <PostHeader>
+            <h1>{post.title}</h1>
+            <p>{formatDate(post.createdAt)}</p>
+            {PostButton}
+          </PostHeader>
 
-        <GradientBorder />
+          <GradientBorder />
 
-        <Content className="content">{htmlParser(post.body)}</Content>
+          <Content className="content">{htmlParser(post.body)}</Content>
 
-        <Utterancer
-          repo="kokily/dnkdream-comment"
-          issue-term="pathname"
-          label="Comment"
-          theme="github-light"
-          cross-origin="anonymouse"
-          async
-          style={`& .utterances {
+          <Utterancer
+            repo="kokily/dnkdream-comment"
+            issue-term="pathname"
+            label="Comment"
+            theme="github-light"
+            cross-origin="anonymouse"
+            async
+            style={`& .utterances {
             max-width: 950px;
           }`}
-        />
-      </PostBlock>
-    </PageTemplate>
+          />
+        </PostBlock>
+      </PageTemplate>
+    </>
   );
 };
 
@@ -87,6 +96,16 @@ const Content = styled.div`
   color: ${oc.gray[8]};
 
   img {
-    width: 100%;
+    width: 80%;
+  }
+
+  ${media.tablet} {
+    img {
+      width: 100%;
+    }
+  }
+
+  p {
+    line-height: 1.5;
   }
 `;

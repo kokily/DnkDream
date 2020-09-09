@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import useTitle from 'hooks/useTitle';
 import ListPosts from 'components/home/ListPosts';
@@ -33,6 +33,13 @@ const ListPostsContainer = () => {
   const onPost = (id: string) => {
     history.push(`/post/${id}`);
   };
+
+  useEffect(() => {
+    return () => {
+      setSearch('');
+      setTitle('');
+    };
+  }, []);
 
   if (error) return null;
   if (loading) return null;

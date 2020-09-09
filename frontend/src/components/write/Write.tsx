@@ -36,7 +36,7 @@ const Write: React.FC<WriteProps> = ({
           onChange={onChangeEditor}
           config={{
             ckfinder: {
-              uploadUrl: 'http://211.248.186.144:4000/api/uploads',
+              uploadUrl: 'http://localhost:4000/api/uploads',
             },
           }}
         />
